@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python tools/tavily_tool.py)",
+      "Bash(python -c ' *)",
+      "Bash(pip --version)",
+      "Bash(pip install *)",
+      "Bash(python test.py)",
+      "WebSearch"
+    ]
+  }
+}
