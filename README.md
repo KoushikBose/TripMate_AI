@@ -21,7 +21,7 @@ all coordinated through a LangGraph workflow.
 - 📝 Structured travel itinerary generation
 - 🌐 FastAPI backend with a simple web interface
 - 💾 Conversation state persistence using PostgreSQL
-- ⚡ LLM-powered responses with Groq
+- ⚡ LLM-powered responses with Ollama Cloud (Llama 3.1 405B)
 
 ## Tech Stack
 
@@ -30,7 +30,7 @@ all coordinated through a LangGraph workflow.
 - Jinja2 + HTML/CSS/JavaScript frontend
 - LangGraph
 - LangChain
-- Groq LLMs
+- Ollama Cloud LLMs
 - PostgreSQL
 - Tavily API
 - AviationStack API
@@ -54,7 +54,7 @@ Before running the project locally, make sure you have:
 - Python 3.10 or newer installed
 - PostgreSQL running and accessible
 - API keys for:
-  - Groq
+  - Ollama Cloud
   - Tavily
   - AviationStack
 
@@ -64,7 +64,7 @@ Create a .env file in the project root with the following variables:
 
 ```env
 DATABASE_URL=postgresql://user:password@localhost:5432/travel_db
-GROQ_API_KEY=your_groq_api_key
+OLLAMA_API_KEY=your_ollama_cloud_api_key
 AVIATIONSTACK_API_KEY=your_aviationstack_api_key
 TAVILY_API_KEY=your_tavily_api_key
 DEFAULT_ORIGIN_IATA=DAC

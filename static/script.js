@@ -5,6 +5,65 @@ function setPrompt(text) {
     document.getElementById("userInput").value = text;
 }
 
+function formatDateLabel(dateStr) {
+    const date = new Date(dateStr + "T00:00:00");
+
+    return date.toLocaleDateString("en-US", {
+        day: "numeric",
+        month: "short",
+        year: "numeric"
+    });
+}
+
+function getTripDurationDays(startDate, endDate) {
+    const msPerDay = 24 * 60 * 60 * 1000;
+    const start = new Date(startDate + "T00:00:00");
+    const end = new Date(endDate + "T00:00:00");
+
+    return Math.round((end - start) / msPerDay) + 1;
+}
+
+function updateTripDuration() {
+    const startInput = document.getElementById("startDate");
+    const endInput = document.getElementById("endDate");
+    const tripDuration = document.getElementById("tripDuration");
+    const tripDurationText = document.getElementById("tripDurationText");
+
+    if (startInput.value && endInput.value && endInput.value >= startInput.value) {
+        const days = getTripDurationDays(startInput.value, endInput.value);
+
+        tripDurationText.textContent = `${days} ${days === 1 ? "Day" : "Days"} Trip`;
+        tripDuration.classList.remove("hidden");
+    } else {
+        tripDuration.classList.add("hidden");
+    }
+}
+
+function initDatePickers() {
+    const startInput = document.getElementById("startDate");
+    const endInput = document.getElementById("endDate");
+
+    const today = new Date().toISOString().split("T")[0];
+    startInput.min = today;
+    endInput.min = today;
+
+    startInput.addEventListener("change", () => {
+        if (startInput.value) {
+            endInput.min = startInput.value;
+
+            if (endInput.value && endInput.value < startInput.value) {
+                endInput.value = startInput.value;
+            }
+        }
+
+        updateTripDuration();
+    });
+
+    endInput.addEventListener("change", updateTripDuration);
+}
+
+document.addEventListener("DOMContentLoaded", initDatePickers);
+
 function setLoading(isLoading) {
     const sendBtn = document.getElementById("sendBtn");
     const btnText = document.getElementById("btnText");
@@ -69,6 +128,23 @@ async function sendMessage() {
         return;
     }
 
+    const startDate = document.getElementById("startDate").value;
+    const endDate = document.getElementById("endDate").value;
+
+    if (startDate && endDate && endDate < startDate) {
+        showError("Journey end date cannot be before the start date.");
+        return;
+    }
+
+    let finalMessage = message;
+
+    if (startDate && endDate) {
+        const days = getTripDurationDays(startDate, endDate);
+        finalMessage = `${message} (Journey dates: ${formatDateLabel(startDate)} to ${formatDateLabel(endDate)}, ${days} ${days === 1 ? "day" : "days"})`;
+    } else if (startDate) {
+        finalMessage = `${message} (Journey start date: ${formatDateLabel(startDate)})`;
+    }
+
     setLoading(true);
 
     try {
@@ -78,7 +154,7 @@ async function sendMessage() {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                message: message,
+                message: finalMessage,
                 thread_id: currentThreadId
             })
         });
@@ -149,7 +225,7 @@ function downloadPDF() {
         html2canvas: {
             scale: 2,
             useCORS: true,
-            backgroundColor: "#ffffff"
+            backgroundColor: "#0a0e1c"
         },
         jsPDF: {
             unit: "in",

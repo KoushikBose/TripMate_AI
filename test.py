@@ -2,6 +2,8 @@ import asyncio
 from tools.tavily_tool import tavily_search
 from tools.flight_tool import search_flights
 from backend import run_travel_agent
+#from mcp_client_test import get_all_tools, tavily_mcp_search
+from mcp_client import get_all_tools
 
 # res = asyncio.run(tavily_search("Best Hotel In India"))
 # print(res)
@@ -9,11 +11,15 @@ from backend import run_travel_agent
 # r1=search_flights("Plan 7 Days Australlia Trip from India")
 # print(r1)
 
-Result1=input("Enter Travel Request: ")
+# Result1=input("Enter Travel Request: ")
 
-Response=run_travel_agent(
-    user_input=Result1
-)
+# Response=run_travel_agent(
+#     user_input=Result1
+# )
 
-print("\n Final Response:\n")
-print(Response["answer"])
+# print("\n Final Response:\n")
+# print(Response["answer"])
+
+
+if __name__=="__main__":
+    asyncio.run(get_all_tools())

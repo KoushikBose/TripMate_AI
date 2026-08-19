@@ -22,7 +22,7 @@
 
         <section class="hero-section">
             <div class="badge">
-                ✈️ TripMate AI — A Multi-Agent Travel Planner with LangGraph
+                ✈️ TripMate AI — A Multi-Agent Travel Planner with LangGraph & MCP
             </div>
 
             <h1>
@@ -40,13 +40,32 @@
                 <div>
                     <h2>Where do you want to go?</h2>
                     <p>
-                        Example: Plan a complete 7 days Japan trip from Bangladesh under 2 lakhs.
+                        Example: Plan a complete 7 days Japan trip from India Under 2 Lakh.
                     </p>
                 </div>
 
                 <div class="status-pill">
                     <span class="status-dot"></span>
                     Online
+                </div>
+            </div>
+
+            <div class="date-row">
+                <div class="date-field">
+                    <label for="startDate"><span class="date-icon">🛫</span> Start Date</label>
+                    <input type="date" id="startDate">
+                </div>
+
+                <span class="date-divider"></span>
+
+                <div class="date-field">
+                    <label for="endDate"><span class="date-icon">🛬</span> End Date</label>
+                    <input type="date" id="endDate">
+                </div>
+
+                <div id="tripDuration" class="trip-duration hidden">
+                    <span class="status-dot"></span>
+                    <span id="tripDurationText">0 Days Trip</span>
                 </div>
             </div>
 
@@ -63,16 +82,32 @@
             </div>
 
             <div class="quick-prompts">
-                <button onclick="setPrompt('Plan a complete 7 days Japan trip from Bangladesh including flights, hotels and sightseeing under 2 lakhs.')">
+                <button onclick="setPrompt('Plan a complete 7 days Japan trip from Kolkata, India including flights, hotels and sightseeing under 2 lakhs.')">
                     Japan Trip
                 </button>
 
-                <button onclick="setPrompt('Plan a 5 days Dubai trip from Dhaka with flights, hotels and sightseeing.')">
+                <button onclick="setPrompt('Plan a 5 days Dubai trip from Kolkata, India with flights, hotels and sightseeing.')">
                     Dubai Trip
                 </button>
 
-                <button onclick="setPrompt('Plan a 7 days Thailand trip from Bangladesh with budget hotels and sightseeing.')">
+                <button onclick="setPrompt('Plan a 7 days Thailand trip from Kolkata, India with budget hotels and sightseeing.')">
                     Thailand Trip
+                </button>
+
+                <button onclick="setPrompt('Plan a 6 days Bali trip from Kolkata, India with flights, hotels and sightseeing.')">
+                    Bali Trip
+                </button>
+
+                <button onclick="setPrompt('Plan a 5 days Singapore trip from Kolkata, India with flights, hotels and sightseeing.')">
+                    Singapore Trip
+                </button>
+
+                <button onclick="setPrompt('Plan a 4 days Maldives trip from Kolkata, India with flights, hotels and sightseeing.')">
+                    Maldives Trip
+                </button>
+
+                <button onclick="setPrompt('Plan a 6 days Vietnam trip from Kolkata, India with budget hotels and sightseeing.')">
+                    Vietnam Trip
                 </button>
 
                 <button onclick="setPrompt('Give me all country flight info.')">
@@ -113,7 +148,7 @@
     </main>
 
     <footer>
-        Built with FastAPI, LangGraph, Groq, PostgreSQL, Tavily and AviationStack
+        Built with FastAPI, LangGraph, Ollama, PostgreSQL, Tavily and AviationStack
     </footer>
 
     <!-- Markdown Renderer -->

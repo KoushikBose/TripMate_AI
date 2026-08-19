@@ -1,3 +1,7 @@
+import sys
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # type: ignore[union-attr]
+sys.stderr.reconfigure(encoding="utf-8", errors="replace")  # type: ignore[union-attr]
+
 from pathlib import Path
 import traceback
 import uvicorn
@@ -7,6 +11,8 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
+import nest_asyncio
+nest_asyncio.apply()
 
 from backend import run_travel_agent
 
