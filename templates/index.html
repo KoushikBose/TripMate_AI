@@ -34,6 +34,17 @@
             </p>
         </section>
 
+        <div class="tab-nav">
+            <button type="button" class="tab-btn active" id="tabPlannerBtn" onclick="switchTab('planner')">
+                🧭 Trip Planner
+            </button>
+            <button type="button" class="tab-btn" id="tabFlightBtn" onclick="switchTab('flight')">
+                ✈️ Flight Tracking
+            </button>
+        </div>
+
+        <section id="plannerTab" class="tab-panel">
+
         <section class="planner-card">
 
             <div class="card-header">
@@ -144,6 +155,73 @@
         </section>
 
         <section id="errorBox" class="error-box hidden"></section>
+
+        </section>
+
+        <section id="flightTab" class="tab-panel hidden">
+
+            <section class="planner-card">
+
+                <div class="card-header">
+                    <div>
+                        <h2>Track Real Flights</h2>
+                        <p>
+                            Search live schedules, airlines and prices powered by Google Flights.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="date-row">
+                    <div class="date-field">
+                        <label for="flightOrigin"><span class="date-icon">🛫</span> From</label>
+                        <input type="text" id="flightOrigin" placeholder="City or airport, e.g. Delhi">
+                    </div>
+
+                    <span class="date-divider"></span>
+
+                    <div class="date-field">
+                        <label for="flightDestination"><span class="date-icon">🛬</span> To</label>
+                        <input type="text" id="flightDestination" placeholder="City or airport, e.g. Tokyo">
+                    </div>
+                </div>
+
+                <div class="date-row">
+                    <div class="date-field">
+                        <label for="flightDepartDate"><span class="date-icon">📅</span> Departure Date</label>
+                        <input type="date" id="flightDepartDate">
+                    </div>
+
+                    <span class="date-divider"></span>
+
+                    <div class="date-field">
+                        <label for="flightReturnDate"><span class="date-icon">📅</span> Return Date (optional)</label>
+                        <input type="date" id="flightReturnDate">
+                    </div>
+                </div>
+
+                <button id="flightSearchBtn" onclick="searchFlightTracking()">
+                    <span id="flightBtnText">Search Flights</span>
+                    <span id="flightBtnLoader" class="loader hidden"></span>
+                </button>
+
+            </section>
+
+            <section id="flightErrorBox" class="error-box hidden"></section>
+
+            <section id="flightResultSection" class="result-section hidden">
+
+                <div class="result-header">
+                    <div>
+                        <h2>Flight Results</h2>
+                        <p id="flightRouteInfo">-</p>
+                    </div>
+                </div>
+
+                <div id="flightResultBox" class="flight-result-box"></div>
+
+            </section>
+
+        </section>
 
     </main>
 
