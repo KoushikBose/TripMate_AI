@@ -84,7 +84,24 @@
       "PowerShell($conn = Get-NetTCPConnection -LocalPort 8000 -State Listen -ErrorAction SilentlyContinue; if \\($conn\\) { Stop-Process -Id $conn.OwningProcess -Force; \"stopped\" } else { \"no listener\" })",
       "Bash(\"C:\\\\Users\\\\koush\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\python.exe\" -c \"import ast; ast.parse\\(open\\('tools/serp_flight_tool.py', encoding='utf-8'\\).read\\(\\)\\); ast.parse\\(open\\('app.py', encoding='utf-8'\\).read\\(\\)\\); print\\('PY_OK'\\)\")",
       "Bash(node --check static/script.js)",
-      "Bash(git check-ignore *)"
+      "Bash(git check-ignore *)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} | content-type: %{content_type} | size: %{size_download}\\\\n\" https://tripmate-ai-4.onrender.com/static/style.css)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code} | content-type: %{content_type} | size: %{size_download}\\\\n\" https://tripmate-ai-4.onrender.com/)",
+      "Bash(curl -s -I https://tripmate-ai-4.onrender.com/static/style.css)",
+      "Bash(curl -s -o /dev/null -w \"script.js: HTTP %{http_code}\\\\n\" https://tripmate-ai-4.onrender.com/static/script.js)",
+      "Bash(curl -s -o /dev/null -w \"health: HTTP %{http_code}\\\\n\" https://tripmate-ai-4.onrender.com/health)",
+      "Bash(curl -s -o /dev/null -w \"nonexistent: HTTP %{http_code}\\\\n\" https://tripmate-ai-4.onrender.com/static/doesnotexist.css)",
+      "Bash(curl -s https://tripmate-ai-4.onrender.com/static/style.css)",
+      "Bash(py -3.12 -m venv repro_venv)",
+      "Bash(./repro_venv/Scripts/python -m pip install -q fastapi==0.136.3 uvicorn==0.48.0 jinja2==3.1.6)",
+      "Bash(./repro_venv/Scripts/python -m uvicorn repro_app:app --host 127.0.0.1 --port 8123)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://127.0.0.1:8123/static/style.css)",
+      "Bash(pkill -f uvicorn)",
+      "Bash(py -3.14 -m venv repro_venv314)",
+      "Bash(./repro_venv314/Scripts/python -m pip install -q fastapi==0.136.3 uvicorn==0.48.0 jinja2==3.1.6)",
+      "Bash(rm -rf static)",
+      "Bash(cp -r \"/c/Users/koush/OneDrive/Desktop/TripMate_AI/static\" .)",
+      "Bash(git rev-list *)"
     ]
   }
 }
